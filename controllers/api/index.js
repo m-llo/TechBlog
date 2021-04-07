@@ -3,7 +3,8 @@ const homeRoutes = require('./homeRoutes');
 const commentRoutes = require('./commentRoutes');
 
 
-router.use('/home', homeRoutes, commentRoutes);
+router.use('/blog', homeRoutes);
+router.use('/comment', commentRoutes);
 
 
 module.exports = router;
