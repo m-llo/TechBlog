@@ -15,12 +15,8 @@ need new blog button in html that starts new-blog-form
 
 
 
-const deleteButton = document.querySelector('.deleteButton');
+const deleteButton = document.querySelector('#blog_delete');
 deleteButton.addEventListener('click', blogDelete);
-
-
-const updateButton = document.querySelector('.updateButton');
-deleteButton.addEventListener('click', blogUpdate);
 
 const commentAddButton = document.querySelector('.commentAddform');
 commentAddButton.addEventListener('submit', addComment);
@@ -29,15 +25,15 @@ const commentDeleteButton = document.querySelector('.commentDeleteButton');
 commentDeleteButton.addEventListener('click', commentDelete);
 
 
-document.querySelector('.new-blog-form').addEventListener('submit', newBlogHandler);
+document.querySelector('#blog_submit').addEventListener('submit', newBlogPost);
 
-async function newBlogHandler(event) {
+async function newBlogPost(event) {
     event.preventDefault();
-    const title = document.querySelector('.blog_title').value;
-    const content = document.querySelector('.content').value;
+    const title = document.querySelector('#blog_title').value;
+    const content = document.querySelector('#content').value;
 
     // Send fetch request to add a new blog
-    const response = await fetch(`/api/blog`, {
+    const response = await fetch(`/api/post`, {
       method: 'POST',
       body: JSON.stringify({
         title: title,
@@ -49,15 +45,15 @@ async function newBlogHandler(event) {
     });
     //if the blog is added, the 'homepage' template will be rerendered
     if (response.ok) {
-      document.location.replace('/home');
+      document.location.replace('/blog');
     } else {
       alert('Failed to add blog');
     }
   };
   
   async function blogDelete () {
-    const title = document.querySelector('.blog_title').value;
-    const response = await fetch('/api/blog', {
+    const title = document.querySelector('#blogTitle').value;
+    const response = await fetch('/api/delete', {
             method: 'DELETE',
             body: JSON.stringify({
                 title: title
@@ -68,24 +64,6 @@ async function newBlogHandler(event) {
             alert('Failed to delete blog');
           }
   };
-  
-  async function blogUpdate () {
-    const title = document.querySelector('.blog_title').value;
-    const content = document.querySelector('.content').value;
-
-    const response = await fetch('/api/blog', {
-            method: 'PUT',
-            body: JSON.stringify({
-                title: title,
-                content: content
-            })
-        }); if (response.ok) {
-            document.location.replace('/home');
-          } else {
-            alert('Failed to update blog');
-          }
-  };
-
   
   async function addComment () {
     const title = document.querySelector('.comment_title').value;
@@ -105,7 +83,7 @@ async function newBlogHandler(event) {
 
   async function commentDelete () {
     const title = document.querySelector('.comment_title').value;
-    const response = await fetch('/api/comment', {
+    const response = await fetch('/api/deletecomment', {
             method: 'DELETE',
             body: JSON.stringify({
                 title: title

@@ -1,0 +1,57 @@
+
+
+{{#each blogs as |blog|}}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8" id="blogTitle">{{blog.title}}</div>
+    <div class="col-sm-4" id="blogPostDate">{{format_date blog.post_date}}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm" id="blogContent">{{blog.content}}</div>
+ {{#if current_user === blog.user_id}}
+  <div class="row">
+    <button class="btn btn-danger" id="blog_delete" type="submit" value="Submit">
+      Delete
+    </button>
+  </div>
+  {{/if}}
+</div>
+{{ > comment}}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8" id="commentUserName">{{comment.user_id}}</div>
+    <div class="col-sm-4" id=""></div>
+  </div>
+  <div class="row">
+    <div class="col-sm" id="commentContent"{{comment.content}}</div>
+  </div>
+</div>
+<div class="row">
+    {{ > add-comment}}
+  </div>
+{{/each}}
+
+<h1>Submit a new Blog Post here:</h1>
+<form class="new-blog-form">
+    
+    <label for="blog_title">
+      Blog Title:
+    </label>
+    <br />
+    <textarea id="blog_title" name="blog_title" rows="2" cols="30">
+     {{title}}
+    </textarea>
+    <br />
+    <label for="blog_content">
+    Content:
+    </label>
+    <br />
+    <textarea id="blog_content" name="content" rows="5" cols="30">
+     {{content}}
+    </textarea>
+    <br />
+
+    <button class="btn btn-primary" id="blog_submit" type="submit" value="Submit">
+      Submit
+    </button>
+  </form>

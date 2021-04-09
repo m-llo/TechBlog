@@ -7,4 +7,13 @@ module.exports = {
         new Date(date).getFullYear()
       }`;
     },
+    current_user: () => {
+      return req.session.userid
+    },
+    loggedIn: () =>{
+      if (req.session.loggedIn){
+
+        return true
+      }
+    }
   };

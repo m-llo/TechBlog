@@ -2,21 +2,21 @@ const router = require('express').Router();
 const Comment = require('../../models/Comment');
 const withAuth = require('../../utils/auth');
 
-// route to get all blogs
-router.get('/home', withAuth, async (req, res) => {
+// route to get all comments
+router.get('/', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.findAll().catch((err) => { 
       res.json(err);
     });
-      const comments = commentData.map((comment) => Comment.get({ plain: true }));
-      res.render('homepage', { comments });
+      const comment = commentData.map((comment) => Comment.get({ plain: true }));
+      res.render('homepage', { comment });
     }catch (err) {
     res.status(500).json(err);
   }
 });
 
-// route to post new blog
-router.post('/home', withAuth, async (req, res) => {
+// route to post new comment
+router.post('/comment', withAuth, async (req, res) => {
   try {
      await Comment.create({
       content: req.body.content,
@@ -25,14 +25,14 @@ router.post('/home', withAuth, async (req, res) => {
     });
 
     res.status(200);
-    res.redirect('/home')
+    res.redirect('/blog')
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
 
-router.delete('/home', withAuth, async (req, res) => {
+router.delete('/deletecomment', withAuth, async (req, res) => {
   try {
      await Comment.destroy( 
       { where: {
@@ -40,7 +40,7 @@ router.delete('/home', withAuth, async (req, res) => {
         }
     });
     res.status(200);
-    res.redirect('/home')
+    res.redirect('/blog')
   } catch (err) {
     res.status(400).json(err);
   }

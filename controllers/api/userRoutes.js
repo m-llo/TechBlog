@@ -1,14 +1,7 @@
 const router = require('express').Router();
-const  User  = require('../models/User');
+const  User  = require('../../models/User');
 const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
-  try {
-    res.redirect('/login');
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 router.post('/new', async (req, res) => {
   try {
@@ -51,21 +44,12 @@ router.post('/login', async (req, res) => {
       
       res.json({message: 'You are now logged in!' });
     });
-    res.redirect('/api/home')
+    res.redirect('/api/blog')
 
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
-});
 
 module.exports = router;

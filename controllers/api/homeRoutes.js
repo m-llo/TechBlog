@@ -3,9 +3,16 @@ const Blog = require('../../models/User');
 const withAuth = require('../../utils/auth');
 
 // route to get all blogs
-router.get('/home', withAuth, async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
-    const blogData = await Blog.findAll().catch((err) => { 
+    const blogData = await Blog.findAll({
+      include:[
+        {
+          model: Comment,
+          attributes:['user_name', 'content']
+        }
+      ]
+    }).catch((err) => { 
       res.json(err);
     });
       const blogs = blogData.map((blog) => Blog.get({ plain: true }));
@@ -16,7 +23,7 @@ router.get('/home', withAuth, async (req, res) => {
 });
 
 // route to post new blog
-router.post('/home', withAuth, async (req, res) => {
+router.post('/post', withAuth, async (req, res) => {
   try {
      await Blog.create({
       title: req.body.title,
@@ -26,27 +33,27 @@ router.post('/home', withAuth, async (req, res) => {
     });
 
     res.status(200);
-    res.redirect('/home')
+    res.redirect('/blog')
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-router.put('/home', withAuth, async (req, res) => {
-  try {
-     await Blog.Update(req.body, 
-      { where: {
-        title: req.body.title,
-        }
-    });
-    res.status(200);
-    res.redirect('/home')
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+// router.put('/home', withAuth, async (req, res) => {
+//   try {
+//      await Blog.Update(req.body, 
+//       { where: {
+//         title: req.body.title,
+//         }
+//     });
+//     res.status(200);
+//     res.redirect('/home')
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
 
-router.delete('/home', withAuth, async (req, res) => {
+router.delete('/delete', withAuth, async (req, res) => {
   try {
      await Blog.destroy( 
       { where: {
@@ -55,7 +62,7 @@ router.delete('/home', withAuth, async (req, res) => {
     });
 
     res.status(200);
-    res.redirect('/home')
+    res.redirect('/blog')
   } catch (err) {
     res.status(400).json(err);
   }
