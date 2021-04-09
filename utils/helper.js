@@ -8,7 +8,7 @@ module.exports = {
       }`;
     },
     current_user: () => {
-      return req.session.userid
+      return req.session.userId
     },
     loggedIn: () =>{
       if (req.session.loggedIn){

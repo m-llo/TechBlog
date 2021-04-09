@@ -20,8 +20,9 @@ router.post('/comment', withAuth, async (req, res) => {
   try {
      await Comment.create({
       content: req.body.content,
+      user_name: req.session.email,
       user_id: req.session.user_id,
-      blog_ud: req.session.blog_id,
+      blog_id: req.body.blog_id,
     });
 
     res.status(200);
@@ -45,3 +46,5 @@ router.delete('/deletecomment', withAuth, async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+module.exports = router;

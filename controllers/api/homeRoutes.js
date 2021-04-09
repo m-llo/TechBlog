@@ -23,11 +23,12 @@ router.get('/', withAuth, async (req, res) => {
 });
 
 // route to post new blog
-router.post('/post', withAuth, async (req, res) => {
+router.post('/blog', withAuth, async (req, res) => {
   try {
      await Blog.create({
       title: req.body.title,
       content: req.body.content,
+      user_name: req.session.email,
       post_date: req.params.date_string,
       user_id: req.session.user_id,
     });
@@ -68,3 +69,4 @@ router.delete('/delete', withAuth, async (req, res) => {
   }
 });
 
+module.exports = router;

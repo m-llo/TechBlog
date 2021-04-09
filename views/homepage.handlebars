@@ -8,7 +8,7 @@
   </div>
   <div class="row">
     <div class="col-sm" id="blogContent">{{blog.content}}</div>
- {{#if current_user === blog.user_id}}
+ {{#if current_user === blog.userId}}
   <div class="row">
     <button class="btn btn-danger" id="blog_delete" type="submit" value="Submit">
       Delete
@@ -16,14 +16,14 @@
   </div>
   {{/if}}
 </div>
-{{ > comment}}
+{{ > comment.handlebars}}
 <div class="container">
   <div class="row">
-    <div class="col-sm-8" id="commentUserName">{{comment.user_id}}</div>
+    <div class="col-sm-8" id="commentUserName">{{blog.comment.user_id}}</div>
     <div class="col-sm-4" id=""></div>
   </div>
   <div class="row">
-    <div class="col-sm" id="commentContent"{{comment.content}}</div>
+    <div class="col-sm" id="commentContent">{{blog.comment.content}}</div>
   </div>
 </div>
 <div class="row">

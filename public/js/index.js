@@ -33,11 +33,12 @@ async function newBlogPost(event) {
     const content = document.querySelector('#content').value;
 
     // Send fetch request to add a new blog
-    const response = await fetch(`/api/post`, {
+    const response = await fetch(`/api/blog`, {
       method: 'POST',
       body: JSON.stringify({
         title: title,
         content: content,
+        
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -45,7 +46,7 @@ async function newBlogPost(event) {
     });
     //if the blog is added, the 'homepage' template will be rerendered
     if (response.ok) {
-      document.location.replace('/blog');
+      document.location.replace('/');
     } else {
       alert('Failed to add blog');
     }
@@ -73,6 +74,7 @@ async function newBlogPost(event) {
             body: JSON.stringify({
                 title: title,
                 content: content,
+                
             })
         }); if (response.ok) {
             document.location.replace('/home');
