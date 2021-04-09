@@ -60,7 +60,7 @@ async function newBlogPost(event) {
                 title: title
             })
         }); if (response.ok) {
-            document.location.replace('/home');
+            document.location.replace('/');
           } else {
             alert('Failed to delete blog');
           }
@@ -77,7 +77,7 @@ async function newBlogPost(event) {
                 
             })
         }); if (response.ok) {
-            document.location.replace('/home');
+            document.location.replace('/');
           } else {
             alert('Failed to add comment');
           }
@@ -91,7 +91,7 @@ async function newBlogPost(event) {
                 title: title
             })
         }); if (response.ok) {
-            document.location.replace('/home');
+            document.location.replace('/');
           } else {
             alert('Failed to delete comment');
           }

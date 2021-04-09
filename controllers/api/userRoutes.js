@@ -44,7 +44,7 @@ router.post('/login', async (req, res) => {
       
       res.json({message: 'You are now logged in!' });
     });
-    res.redirect('/api/blog')
+    res.redirect('/')
 
   } catch (err) {
     res.status(400).json(err);

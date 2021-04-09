@@ -3,26 +3,25 @@ const Comment = require('../../models/Comment');
 const withAuth = require('../../utils/auth');
 
 // route to get all comments
-router.get('/', withAuth, async (req, res) => {
-  try {
-    const commentData = await Comment.findAll().catch((err) => { 
-      res.json(err);
-    });
-      const comment = commentData.map((comment) => Comment.get({ plain: true }));
-      res.render('homepage', { comment });
-    }catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.get('/', withAuth, async (req, res) => {
+//   try {
+//     const commentData = await Comment.findAll().catch((err) => { 
+//       res.json(err);
+//     });
+//       const comment = commentData.map((comment) => Comment.get({ plain: true }));
+//       res.render('homepage', { comment });
+//     }catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // route to post new comment
 router.post('/comment', withAuth, async (req, res) => {
   try {
      await Comment.create({
       content: req.body.content,
-      user_name: req.session.email,
-      user_id: req.session.user_id,
-      blog_id: req.body.blog_id,
+      user_id: req.session.userId,
+      blog_id: req.body.blogId,
     });
 
     res.status(200);

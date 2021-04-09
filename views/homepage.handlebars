@@ -3,11 +3,12 @@
 {{#each blogs as |blog|}}
 <div class="container">
   <div class="row">
-    <div class="col-sm-8" id="blogTitle">{{blog.title}}</div>
-    <div class="col-sm-4" id="blogPostDate">{{format_date blog.post_date}}</div>
+    <div class="col-sm-4" id="blogTitle"><h3>{{blog.title}}</h3></div>
+    <div class="col-sm-4" id="blogUser"><h5>{{blog.user.name}}</h5></div>
+    <div class="col-sm-4" id="blogPostDate"><h5>{{format_date blog.post_date}}</h5></div>
   </div>
   <div class="row">
-    <div class="col-sm" id="blogContent">{{blog.content}}</div>
+    <div class="col-sm" id="blogContent"><p>{{blog.content}}</p></div>
  {{#if current_user === blog.userId}}
   <div class="row">
     <button class="btn btn-danger" id="blog_delete" type="submit" value="Submit">
@@ -16,14 +17,14 @@
   </div>
   {{/if}}
 </div>
-{{ > comment.handlebars}}
+{{!-- {{ > comment.handlebars}} --}}
 <div class="container">
   <div class="row">
-    <div class="col-sm-8" id="commentUserName">{{blog.comment.user_id}}</div>
+    <div class="col-sm-8" id="commentUserName"><p>{{blog.comment.user.email}}</p></div>
     <div class="col-sm-4" id=""></div>
   </div>
   <div class="row">
-    <div class="col-sm" id="commentContent">{{blog.comment.content}}</div>
+    <div class="col-sm" id="commentContent"><p>{{blog.comment.content}}</p></div>
   </div>
 </div>
 <div class="row">

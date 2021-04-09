@@ -28,13 +28,12 @@ router.post('/blog', withAuth, async (req, res) => {
      await Blog.create({
       title: req.body.title,
       content: req.body.content,
-      user_name: req.session.email,
       post_date: req.params.date_string,
-      user_id: req.session.user_id,
+      user_id: req.session.userId,
     });
 
     res.status(200);
-    res.redirect('/blog')
+    res.redirect('/')
   } catch (err) {
     res.status(400).json(err);
   }
@@ -63,7 +62,7 @@ router.delete('/delete', withAuth, async (req, res) => {
     });
 
     res.status(200);
-    res.redirect('/blog')
+    res.redirect('/')
   } catch (err) {
     res.status(400).json(err);
   }
